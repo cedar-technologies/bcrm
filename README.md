@@ -1,6 +1,6 @@
 # bcrm
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7c032761c2404903ade6efe638f6e8de)](https://www.codacy.com/app/cedar-technologies/bcrm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skalpel-tech/bcrm&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c786ce57567ecefe0fb6/maintainability)](https://codeclimate.com/github/skalpel-tech/bcrm/maintainability)
 
 Open Source Business CRM Solution
 
@@ -41,4 +41,26 @@ flask run
 
 import [postman collection](postman/BCRM.postman_collection.json)  [postman environment](postman/BCRM.postman_environment.json)
 
-or start building an application: [swagger](docs/BCRM.swagger.yml)
+or start building an application: [swagger](docs\BCRM.swagger.yml)
+
+## Tests
+
+Install tests dependencies
+
+```bash
+pip install -r tests/requirements.txt
+```
+
+Run the tests
+
+```bash
+pytest
+```
+
+Run with coverage report::
+
+```
+coverage run -m pytest
+coverage report
+coverage html  # open htmlcov/index.html in a browser
+```
