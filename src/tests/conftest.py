@@ -7,7 +7,7 @@ from app.core.db import db as _db
 @pytest.fixture(scope='session')
 def app():
     """Session-wide test `Flask` application."""
-    
+
     app = create_app()
     app.config.update(
         TESTING=True,
