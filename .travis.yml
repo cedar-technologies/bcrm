@@ -10,3 +10,8 @@ install:
 # command to run tests
 script:
   - pytest
+
+after_success:
+  - pylint --disable=fixme src/app
+  - coveralls
+  - coverage xml && python-codacy-coverage -r coverage.xml
