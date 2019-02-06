@@ -18,13 +18,11 @@ def app():
     ctx = app.app_context()
     ctx.push()
 
-    def teardown():
-        ctx.pop()
-
     with app.app_context():
         _db.create_all()
         yield app
         _db.drop_all()
+    ctx.pop()
 
 @pytest.fixture(scope='session')
 def client(app):
@@ -34,14 +32,13 @@ def client(app):
 @pytest.fixture(scope='session')
 def db(app):
     """Session-wide test database."""
-
-    def teardown():
-        _db.drop_all()
-
+ 
     _db.app = app
     _db.create_all()
 
-    return _db
+    yield _db
+
+    _db.drop_all()
 
 
 @pytest.fixture(scope='function')
@@ -55,9 +52,8 @@ def session(db):
 
     db.session = session
 
-    def teardown():
-        transaction.rollback()
-        connection.close()
-        session.remove()
+    yield session
 
-    return session
+    transaction.rollback()
+    connection.close()
+    session.remove()
