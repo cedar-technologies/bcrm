@@ -1,4 +1,10 @@
-
+# coding: utf-8
+# -*- coding: utf-8 -*-
+# vim: set fileencoding=utf-8 :
+"""
+Core Api Tests
+==============
+"""
 import json
 
 def create_entity_type(client, name):
@@ -34,7 +40,7 @@ def test_create_entity_type_already_exists(client):
     """
     Tests that entity types creation fail if entity already exists
     """
-    entity_type_id = create_entity_type(client, 'test_create_entity_type_already_exists')
+    create_entity_type(client, 'test_create_entity_type_already_exists')
     entity_type_stub = {
         'name': u'test_create_entity_type_already_exists',
         'schema': { "test": "test"}
@@ -42,7 +48,6 @@ def test_create_entity_type_already_exists(client):
     response = client.post('/api/entity-types',
         data=json.dumps(entity_type_stub),
         content_type='application/json')
-    json_data = response.get_json()
     assert response.status_code == 404
 
 def test_create_entity_types_content_type_not_json(client):
